@@ -1,0 +1,15 @@
+mapping {
+  map eventParameter('user_country') onto 'user_country'
+  map eventParameter('user_state') onto 'user_state'
+  map eventParameter('user_city') onto 'user_city'
+  map eventParameter('user_postal') onto 'user_postal'
+  map eventParameter('latitude') onto 'latitude'
+  map eventParameter('longitude') onto 'longitude'
+  map eventParameter('ip') onto 'ip'
+  map eventParameter('browser_name') onto 'browser_name'
+  map eventParameter('full_version') onto 'full_version'
+  map eventParameter('major_version') onto 'major_version'
+  map eventParameter('navigator_app_name') onto 'navigator_app_name'
+  map eventParameter('navigator_user_agent') onto 'navigator_user_agent'
+  map eventParameter('os_name') onto 'os_name'
+}

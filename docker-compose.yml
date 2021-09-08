@@ -1,0 +1,37 @@
+version: "3.3"
+services:
+
+  # Website container
+  website:
+    build:
+      context: .
+      dockerfile: ./docker-images/Dockerfile.website
+    image: website
+    ports:
+      - '80:80'
+
+  # Kafka/Zookeeper container
+  divolte-kafka:
+    image: krisgeus/docker-kafka
+    environment:
+      ADVERTISED_HOST: divolte-kafka
+      LOG_RETENTION_HOURS: 1
+      AUTO_CREATE_TOPICS: "false"
+      KAFKA_CREATE_TOPICS: tracking:4:1
+      ADVERTISED_LISTENERS: PLAINTEXT://divolte-kafka:9092,INTERNAL://localhost:9093
+      LISTENERS: PLAINTEXT://0.0.0.0:9092,INTERNAL://0.0.0.0:9093
+      SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,INTERNAL:PLAINTEXT
+      INTER_BROKER: INTERNAL
+
+  # Divolte container
+  docker-divolte:
+    build:
+      context: .
+      dockerfile: ./docker-images/Dockerfile.divolte
+    image: divolte-collector
+    environment:
+      DIVOLTE_KAFKA_BROKER_LIST: divolte-kafka:9092
+    ports:
+      - 8290:8290
+    depends_on:
+      - divolte-kafka
