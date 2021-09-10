@@ -13,6 +13,7 @@ services:
   # Kafka/Zookeeper container
   divolte-kafka:
     image: krisgeus/docker-kafka
+    restart: always
     environment:
       ADVERTISED_HOST: divolte-kafka
       LOG_RETENTION_HOURS: 1
@@ -29,9 +30,24 @@ services:
       context: .
       dockerfile: ./docker-images/Dockerfile.divolte
     image: divolte-collector
+    restart: always
     environment:
       DIVOLTE_KAFKA_BROKER_LIST: divolte-kafka:9092
     ports:
       - 8290:8290
+    depends_on:
+      - divolte-kafka
+
+  # Apache Druid
+  apache-druid:
+    build:
+      context: .
+      dockerfile: ./docker-images/Dockerfile.druid
+    image: druid
+    restart: always
+    ports:
+      - 8081:8081
+      - 8082:8082
+      - 8888:8888
     depends_on:
       - divolte-kafka
