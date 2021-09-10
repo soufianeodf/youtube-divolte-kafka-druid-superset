@@ -13,6 +13,10 @@ RUN apt-get update && \
     rm -fr /var/tmp/* /tmp/*
     \
 
+COPY druid/common.runtime.properties /opt/druid/apache-druid/conf/druid/single-server/micro-quickstart/_common/
+
+COPY divolte-collector/conf/MyEventRecord.avsc /opt/druid/
+
 EXPOSE 8888
 EXPOSE 8081
 EXPOSE 8082

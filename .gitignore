@@ -1,1 +1,4 @@
 .DS_Store
+druid/apache-druid-0.21.1
+*.gz
+druid/micro-quickstart.conf
