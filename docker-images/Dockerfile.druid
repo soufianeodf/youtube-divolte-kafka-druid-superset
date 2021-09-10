@@ -13,7 +13,7 @@ RUN apt-get update && \
     rm -fr /var/tmp/* /tmp/*
     \
 
-COPY ./druid/common.runtime.properties /opt/druid/apache-druid/conf/druid/single-server/micro-quickstart/_common/common.runtime.properties
+COPY ../druid/common.runtime.properties /opt/druid/apache-druid/conf/druid/single-server/micro-quickstart/_common/common.runtime.properties
 
 COPY divolte-collector/conf/MyEventRecord.avsc /opt/druid/
 
