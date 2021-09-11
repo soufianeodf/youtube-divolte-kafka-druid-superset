@@ -52,6 +52,15 @@ services:
     depends_on:
       - divolte-kafka
 
+  # Schema Registry
+  schema-registry:
+    image: confluentinc/cp-schema-registry:5.5.3
+    depends_on:
+      - divolte-kafka
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: divolte-kafka:2181
+
   # ksql server
   ksqldb-server:
     image: confluentinc/ksqldb-server:0.20.0
