@@ -55,10 +55,11 @@ services:
   # Schema Registry
   schema-registry:
     image: confluentinc/cp-schema-registry:5.5.3
+    restart: always
     depends_on:
       - divolte-kafka
     ports:
-      - 8081:8081
+      - 8090:8081
     environment:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
       SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: divolte-kafka:2181
@@ -66,6 +67,7 @@ services:
   # ksql server
   ksqldb-server:
     image: confluentinc/ksqldb-server:0.20.0
+    restart: always
     hostname: ksqldb-server
     container_name: ksqldb-server
     depends_on:
@@ -81,6 +83,7 @@ services:
   # ksql cli
   ksqldb-cli:
     image: confluentinc/ksqldb-cli:0.20.0
+    restart: always
     container_name: ksqldb-cli
     depends_on:
       - divolte-kafka
