@@ -38,9 +38,9 @@ RUN apt-get update && \
 #
 # Configuration changes using divolte-collector.conf
 #
-COPY divolte-collector/conf/ /opt/divolte/divolte-collector/conf/
+COPY conf/ /opt/divolte/divolte-collector/conf/
 
-COPY divolte-collector/start.sh /opt/divolte/
+COPY start.sh /opt/divolte/
 
 #
 # Expose the Divolte Collector click simulation web page

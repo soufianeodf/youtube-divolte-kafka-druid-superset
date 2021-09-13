@@ -27,7 +27,7 @@ public class AvroToJson {
 
     static {
         try {
-            prop.load(new FileInputStream("/config/application.properties"));
+            prop.load(readFile("application.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }
