@@ -2,3 +2,8 @@
 druid/apache-druid-0.21.1
 *.gz
 druid/micro-quickstart.conf
+*.idea
+
+*/target/*
+!*/target/kafka-streams-avro-to-json-1.0-SNAPSHOT-jar-with-dependencies.jar
+*/*.iml

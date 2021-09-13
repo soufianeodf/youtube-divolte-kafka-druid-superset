@@ -1,0 +1,19 @@
+{
+  "name": "tracking",
+  "type": "record",
+  "fields": [
+    { "name": "user_country", "type": "string" },
+    { "name": "user_state", "type": "string" },
+    { "name": "user_city", "type": "string" },
+    { "name": "user_postal", "type": "string" },
+    { "name": "latitude", "type": "string" },
+    { "name": "longitude", "type": "string" },
+    { "name": "ip", "type": "string" },
+    { "name": "browser_name", "type": "string" },
+    { "name": "full_version", "type": "string" },
+    { "name": "major_version", "type": "string" },
+    { "name": "navigator_app_name", "type": "string" },
+    { "name": "navigator_user_agent", "type": "string" },
+    { "name": "os_name", "type": "string" }
+  ]
+}

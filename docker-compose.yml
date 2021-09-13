@@ -18,7 +18,7 @@ services:
       ADVERTISED_HOST: divolte-kafka
       LOG_RETENTION_HOURS: 1
       AUTO_CREATE_TOPICS: "false"
-      KAFKA_CREATE_TOPICS: tracking:4:1
+      KAFKA_CREATE_TOPICS: tracking:4:1,tracking-json:12:1
       ADVERTISED_LISTENERS: PLAINTEXT://divolte-kafka:9092,INTERNAL://localhost:9093
       LISTENERS: PLAINTEXT://0.0.0.0:9092,INTERNAL://0.0.0.0:9093
       SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,INTERNAL:PLAINTEXT
@@ -38,6 +38,16 @@ services:
     depends_on:
       - divolte-kafka
 
+  # Kafka streams
+  kafka-streams:
+    build:
+      context: .
+      dockerfile: ./kafka-streams-avro-to-json/Dockerfile
+    image: kafka-streams
+    restart: always
+    depends_on:
+      - divolte-kafka
+
   # Apache Druid
   apache-druid:
     build:
@@ -53,40 +63,41 @@ services:
       - divolte-kafka
 
   # Schema Registry
-  schema-registry:
-    image: confluentinc/cp-schema-registry:5.5.3
-    restart: always
-    depends_on:
-      - divolte-kafka
-    ports:
-      - 8090:8081
-    environment:
-      SCHEMA_REGISTRY_HOST_NAME: schema-registry
-      SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: divolte-kafka:2181
+#  schema-registry:
+#    image: confluentinc/cp-schema-registry:5.5.3
+#    restart: always
+#    depends_on:
+#      - divolte-kafka
+#    ports:
+#      - 8090:8081
+#    environment:
+#      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+#      SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: divolte-kafka:2181
 
-  # ksql server
-  ksqldb-server:
-    image: confluentinc/ksqldb-server:0.20.0
-    restart: always
-    hostname: ksqldb-server
-    container_name: ksqldb-server
-    depends_on:
-      - divolte-kafka
-    ports:
-      - "8088:8088"
-    environment:
-      KSQL_LISTENERS: http://0.0.0.0:8088
-      KSQL_BOOTSTRAP_SERVERS: divolte-kafka:9092
-      KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: "true"
-      KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE: "true"
+  # # ksql server
+  # ksqldb-server:
+  #   image: confluentinc/ksqldb-server:0.20.0
+  #   restart: always
+  #   hostname: ksqldb-server
+  #   container_name: ksqldb-server
+  #   depends_on:
+  #     - divolte-kafka
+  #   ports:
+  #     - "8088:8088"
+  #   environment:
+  #     KSQL_LISTENERS: http://0.0.0.0:8088
+  #     KSQL_BOOTSTRAP_SERVERS: divolte-kafka:9092
+  #     KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: "true"
+  #     KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE: "true"
+  #     KSQL_KSQL_SCHEMA_REGISTRY_URL: http://161.35.203.30:3030/api/schema-registry
 
-  # ksql cli
-  ksqldb-cli:
-    image: confluentinc/ksqldb-cli:0.20.0
-    restart: always
-    container_name: ksqldb-cli
-    depends_on:
-      - divolte-kafka
-      - ksqldb-server
-    entrypoint: /bin/sh
-    tty: true
+  # # ksql cli
+  # ksqldb-cli:
+  #   image: confluentinc/ksqldb-cli:0.20.0
+  #   restart: always
+  #   container_name: ksqldb-cli
+  #   depends_on:
+  #     - divolte-kafka
+  #     - ksqldb-server
+  #   entrypoint: /bin/sh
+  #   tty: true
