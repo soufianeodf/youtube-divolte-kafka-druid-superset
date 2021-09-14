@@ -17,7 +17,7 @@ services:
 
   # Kafka/Zookeeper container
   divolte-kafka:
-    image: soufianeodf/krisgeus/docker-kafka
+    image: krisgeus/docker-kafka
     container_name: divolte-kafka
     networks:
       - backend
