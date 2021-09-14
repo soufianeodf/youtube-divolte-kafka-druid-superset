@@ -69,7 +69,10 @@ services:
 
   # Apache Superset container
   apache-superset:
-    image: apache/superset:latest
+    build:
+      context: ./superset
+      dockerfile: Dockerfile
+    image: apache-superset
     container_name: superset
     restart: always
     ports:
