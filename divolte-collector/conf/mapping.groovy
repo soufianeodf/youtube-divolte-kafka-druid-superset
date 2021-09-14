@@ -14,7 +14,6 @@ mapping {
   map eventParameter('language_code') onto 'language_code'
   map eventParameter('language_name') onto 'language_name'
   map eventParameter('country_flag_url') onto 'country_flag_url'
-  map eventParameter('country_flag_emoji') onto 'country_flag_emoji'
   map eventParameter('browser_name') onto 'browser_name'
   map eventParameter('browser_full_version') onto 'browser_full_version'
   map eventParameter('browser_major_version') onto 'browser_major_version'

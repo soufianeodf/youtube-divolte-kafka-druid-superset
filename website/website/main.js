@@ -41,7 +41,6 @@ window.addEventListener("load", function(){
                 language_code: window.user.language_code,
                 language_name: window.user.language_name,
                 country_flag_url: window.user.country_flag_url,
-                country_flag_emoji: window.user.country_flag_emoji,
                 browser_name: browserInfo.browser_name,
                 browser_full_version: browserInfo.full_version,
                 browser_major_version: browserInfo.major_version,
