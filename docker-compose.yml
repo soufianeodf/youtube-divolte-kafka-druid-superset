@@ -7,12 +7,14 @@ services:
       context: ./website
       dockerfile: Dockerfile
     image: website
+    container_name: website
     ports:
       - '80:80'
 
   # Kafka/Zookeeper container
   divolte-kafka:
     image: krisgeus/docker-kafka
+    container_name: divolte-kafka
     restart: always
     environment:
       ADVERTISED_HOST: divolte-kafka
@@ -30,6 +32,7 @@ services:
       context: ./divolte-collector
       dockerfile: Dockerfile
     image: divolte-collector
+    container_name: docker-divolte
     restart: always
     environment:
       DIVOLTE_KAFKA_BROKER_LIST: divolte-kafka:9092
@@ -44,6 +47,7 @@ services:
       context: ./kafka-streams-avro-to-json
       dockerfile: Dockerfile
     image: kafka-streams
+    container_name: kafka-streams
     restart: always
     depends_on:
       - divolte-kafka
@@ -53,7 +57,8 @@ services:
     build:
       context: ./druid
       dockerfile: Dockerfile
-    image: druid
+    image: apache-druid
+    container_name: apache-druid
     restart: always
     ports:
       - 8081:8081
@@ -65,6 +70,7 @@ services:
   # Apache Superset container
   apache-superset:
     image: apache/superset:latest
+    container_name: superset
     restart: always
     ports:
       - 8080:8088
