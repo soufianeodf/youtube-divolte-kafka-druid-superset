@@ -11,7 +11,6 @@ RUN apt-get update && \
     apt-get autoremove -y && \
     apt-get clean -y && \
     rm -fr /var/tmp/* /tmp/*
-    \
 
 COPY common.runtime.properties /opt/druid/apache-druid/conf/druid/single-server/micro-quickstart/_common/
 
