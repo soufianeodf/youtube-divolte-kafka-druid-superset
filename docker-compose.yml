@@ -6,15 +6,23 @@ services:
     build:
       context: ./website
       dockerfile: Dockerfile
-    image: website
+    image: soufianeodf/website
     container_name: website
+    networks:
+      - frontend
+    deploy:
+      replicas: 1
     ports:
       - '80:80'
 
   # Kafka/Zookeeper container
   divolte-kafka:
-    image: krisgeus/docker-kafka
+    image: soufianeodf/krisgeus/docker-kafka
     container_name: divolte-kafka
+    networks:
+      - backend
+    deploy:
+      replicas: 1
     restart: always
     environment:
       ADVERTISED_HOST: divolte-kafka
@@ -31,8 +39,13 @@ services:
     build:
       context: ./divolte-collector
       dockerfile: Dockerfile
-    image: divolte-collector
+    image: soufianeodf/divolte-collector
     container_name: docker-divolte
+    networks:
+      - frontend
+      - backend
+    deploy:
+      replicas: 3
     restart: always
     environment:
       DIVOLTE_KAFKA_BROKER_LIST: divolte-kafka:9092
@@ -46,8 +59,12 @@ services:
     build:
       context: ./kafka-streams-avro-to-json
       dockerfile: Dockerfile
-    image: kafka-streams
+    image: soufianeodf/kafka-streams
     container_name: kafka-streams
+    networks:
+      - backend
+    deploy:
+      replicas: 1
     restart: always
     depends_on:
       - divolte-kafka
@@ -57,8 +74,12 @@ services:
     build:
       context: ./druid
       dockerfile: Dockerfile
-    image: apache-druid
+    image: soufianeodf/apache-druid
     container_name: apache-druid
+    networks:
+      - backend
+    deploy:
+      replicas: 1
     restart: always
     ports:
       - 8081:8081
@@ -72,8 +93,16 @@ services:
     build:
       context: ./superset
       dockerfile: Dockerfile
-    image: apache-superset
+    image: soufianeodf/apache-superset
     container_name: superset
+    networks:
+      - backend
+    deploy:
+      replicas: 1
     restart: always
     ports:
       - 8080:8088
+
+networks:
+  frontend:
+  backend:
