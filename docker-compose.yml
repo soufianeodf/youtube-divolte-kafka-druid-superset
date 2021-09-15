@@ -34,6 +34,22 @@ services:
       SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,INTERNAL:PLAINTEXT
       INTER_BROKER: INTERNAL
 
+  # Kafka Manager (CMAK)
+  cmak:
+    image: hlebalbau/kafka-manager:stable
+    container_name: cmak
+    networks:
+      - backend
+    deploy:
+      replicas: 1
+    restart: always
+    ports:
+      - "9000:9000"
+    environment:
+      ZK_HOSTS: "divolte-kafka:2181"
+    depends_on:
+      - divolte-kafka
+
   # Divolte container
   docker-divolte:
     build:
@@ -99,6 +115,8 @@ services:
       - backend
     deploy:
       replicas: 1
+      placement:
+        constraints: [node.node == node1]
     restart: always
     ports:
       - 8080:8088
