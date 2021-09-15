@@ -15,40 +15,52 @@ services:
     ports:
       - '80:80'
 
-  # Kafka/Zookeeper container
+  # Zookeeper container
+  zookeeper:
+    image: zookeeper
+    networks:
+      - backend
+    restart: always
+    container_name: zookeeper
+    hostname: zookeeper
+    ports:
+      - 2181:2181
+    environment:
+      ZOO_MY_ID: 1
+
+  # Apache Kafka container
   divolte-kafka:
-    image: krisgeus/docker-kafka
+    image: wurstmeister/kafka
     container_name: divolte-kafka
     networks:
       - backend
+    ports:
+      - 9092:9092
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: divolte-kafka
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
+      KAFKA_CREATE_TOPICS: "tracking:4:1,tracking-json:12:1"
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://divolte-kafka:9092,INTERNAL://localhost:9093
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,INTERNAL://0.0.0.0:9093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,INTERNAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+
+  # Kafka Manager container
+  kafka_manager:
+    image: hlebalbau/kafka-manager:stable
+    container_name: kafka-manager
+    restart: always
     deploy:
       replicas: 1
-    restart: always
-    environment:
-      ADVERTISED_HOST: divolte-kafka
-      LOG_RETENTION_HOURS: 1
-      AUTO_CREATE_TOPICS: "false"
-      KAFKA_CREATE_TOPICS: tracking:4:1,tracking-json:12:1
-      ADVERTISED_LISTENERS: PLAINTEXT://divolte-kafka:9092,INTERNAL://localhost:9093
-      LISTENERS: PLAINTEXT://0.0.0.0:9092,INTERNAL://0.0.0.0:9093
-      SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,INTERNAL:PLAINTEXT
-      INTER_BROKER: INTERNAL
-
-  # Kafka Manager (CMAK)
-  cmak:
-    image: hlebalbau/kafka-manager:stable
-    container_name: cmak
     networks:
       - backend
-    deploy:
-      replicas: 1
-    restart: always
     ports:
       - "9000:9000"
     environment:
-      ZK_HOSTS: "divolte-kafka:2181"
-    depends_on:
-      - divolte-kafka
+      ZK_HOSTS: "zookeeper:2181"
+      APPLICATION_SECRET: "random-secret"
+    command: -Dpidfile.path=/dev/null
 
   # Divolte container
   docker-divolte:
