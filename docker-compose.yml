@@ -133,7 +133,7 @@ services:
     deploy:
       replicas: 1
       placement:
-        constraints: [node.node == node1]
+        constraints: [node.hostname == node1]
     restart: always
     ports:
       - 8080:8088
