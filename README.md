@@ -152,8 +152,6 @@ ansible-playbook do-swarm.yml -e do_token="<DO TOKEN>"
 
 ## Troubleshooting
 
----
-
 ### Apache Superset
 
 **Issue**: Unexpected Exception: name 'basestring' is not defined when invoking ansible2
