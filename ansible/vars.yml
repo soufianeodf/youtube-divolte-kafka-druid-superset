@@ -1,0 +1,8 @@
+do_token: digital-ocean-token
+droplets:
+  - node1
+  - node2
+  - node3
+do_region: sgp1
+do_size: s-4vcpu-8gb-amd
+ssh_key_ids: digital-ocean-ssh-id
