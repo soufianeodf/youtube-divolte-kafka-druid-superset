@@ -168,7 +168,7 @@ ansible-playbook do-swarm.yml -e do_token="<DO TOKEN>"
 
 In the video, I have simulated with a Selenium tool, visits to the website from different browsers, Operating systems and countries as described in the image bellow, to check if our clickstream solution we built is able to intercept those hits accurately:
 
-<img src="https://raw.githubusercontent.com/soufianeodf/youtube-divolte-kafka-druid-superset/main/images/simulate%20high%20traffic%20website%20visits.png" width=30% height=30%>
+<img src="https://raw.githubusercontent.com/soufianeodf/youtube-divolte-kafka-druid-superset/main/images/simulate%20high%20traffic%20website%20visits.png" width=45% height=45%>
 
 # disclosure
 
