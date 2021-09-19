@@ -102,6 +102,19 @@ Don't forget to generate java .jar after you make any change.
 
 You can modify the Apache Druid config [file](druid/common.runtime.properties) if you want.
 
+After running Apache Druid, to filter payloads having null as country value, we use the following:
+
+```
+{
+   "type":"not",
+   "field":{
+      "type":"selector",
+      "dimension":"country",
+      "value":null
+   }
+}
+```
+
 ## Apache Superset
 
 [superset.sh](superset/superset.sh) is the file responsible for setting the **username** and **password** of Apache Superset dashboard and more, make sure you execute it after Apache Superset is up and running.
