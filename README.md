@@ -107,6 +107,12 @@ In order for Apache Superset to use maps, it's using [Mapbox](https://www.mapbox
 MAPBOX_API_KEY = "you_mapbox_token"
 ```
 
+After running Apache Superset, to connect to Apache Druid:
+
+```
+druid://<User>:<password>@<Host>:<Port-default-8888>/druid/v2/sql
+```
+
 ## Docker
 
 You need to build your images and push them to your docker hub repository, because docker swarm suppose that the images are already built and exists in a docker registry.
