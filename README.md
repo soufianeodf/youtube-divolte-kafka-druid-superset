@@ -31,6 +31,10 @@ password: admin
 
 ![alt text](images/architecture-diagram.png)
 
+# Dashboard
+
+![alt text](images/clickstream-analytics.png)
+
 # Technologies Used
 
 * A [tool](#disclosure) developed with [Selenium](https://www.selenium.dev/) and [Python](https://www.python.org/) (used for website user visits simulation)
