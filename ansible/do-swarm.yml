@@ -44,7 +44,7 @@
       name: global
 
   - name: Install python
-    raw: test -e /usr/bin/python3 || (apt -y update && apt install -y python-minimal python-apt)
+    raw: test -e /usr/bin/apt && (apt -y update && apt install -y python-minimal) || (yum -y install python libselinux-python)
 
   - name: Install packages base
     apt: name={{ packages }} state=present
