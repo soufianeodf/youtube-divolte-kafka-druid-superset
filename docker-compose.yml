@@ -6,7 +6,7 @@ services:
     build:
       context: ./website
       dockerfile: Dockerfile
-    platform: linux/amd64
+#     platform: linux/amd64
     image: soufianeodf/website
     container_name: website
     networks:
@@ -68,7 +68,7 @@ services:
     build:
       context: ./divolte-collector
       dockerfile: Dockerfile
-    platform: linux/amd64
+#     platform: linux/amd64
     image: soufianeodf/divolte-collector
     container_name: docker-divolte
     networks:
@@ -89,7 +89,7 @@ services:
     build:
       context: ./kafka-streams-avro-to-json
       dockerfile: Dockerfile
-    platform: linux/amd64
+#     platform: linux/amd64
     image: soufianeodf/kafka-streams
     container_name: kafka-streams
     networks:
@@ -105,7 +105,7 @@ services:
     build:
       context: ./druid
       dockerfile: Dockerfile
-    platform: linux/amd64
+#     platform: linux/amd64
     image: soufianeodf/apache-druid
     container_name: apache-druid
     networks:
@@ -125,7 +125,7 @@ services:
     build:
       context: ./superset
       dockerfile: Dockerfile
-    platform: linux/amd64
+#     platform: linux/amd64
     image: soufianeodf/apache-superset
     container_name: superset
     networks:
