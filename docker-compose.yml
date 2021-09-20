@@ -79,6 +79,7 @@ services:
     restart: always
     environment:
       DIVOLTE_KAFKA_BROKER_LIST: divolte-kafka:9092
+      DIVOLTE_KAFKA_TOPIC: tracking-avro
     ports:
       - 8290:8290
     depends_on:
