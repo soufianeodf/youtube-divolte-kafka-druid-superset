@@ -5,7 +5,6 @@ druid/micro-quickstart.conf
 *.idea
 
 */target/*
-!*/target/kafka-streams-avro-to-json-1.0-SNAPSHOT-jar-with-dependencies.jar
 */*.iml
 .idea
 *.xml
