@@ -6,7 +6,7 @@ services:
     build:
       context: ./website
       dockerfile: Dockerfile
-    platform: linux/amd64
+#     platform: linux/amd64
     image: soufianeodf/website
     container_name: website
     networks:
@@ -41,7 +41,7 @@ services:
       KAFKA_ADVERTISED_HOST_NAME: divolte-kafka
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
-      KAFKA_CREATE_TOPICS: "tracking:4:1,tracking-json:12:1"
+      KAFKA_CREATE_TOPICS: "tracking-avro:4:1,tracking-json:4:1"
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://divolte-kafka:9092,INTERNAL://localhost:9093
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,INTERNAL://0.0.0.0:9093
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,INTERNAL:PLAINTEXT
@@ -68,7 +68,7 @@ services:
     build:
       context: ./divolte-collector
       dockerfile: Dockerfile
-    platform: linux/amd64
+#     platform: linux/amd64
     image: soufianeodf/divolte-collector
     container_name: docker-divolte
     networks:
@@ -79,6 +79,7 @@ services:
     restart: always
     environment:
       DIVOLTE_KAFKA_BROKER_LIST: divolte-kafka:9092
+      DIVOLTE_KAFKA_TOPIC: tracking-avro
     ports:
       - 8290:8290
     depends_on:
@@ -89,7 +90,7 @@ services:
     build:
       context: ./kafka-streams-avro-to-json
       dockerfile: Dockerfile
-    platform: linux/amd64
+#     platform: linux/amd64
     image: soufianeodf/kafka-streams
     container_name: kafka-streams
     networks:
@@ -105,7 +106,7 @@ services:
     build:
       context: ./druid
       dockerfile: Dockerfile
-    platform: linux/amd64
+#     platform: linux/amd64
     image: soufianeodf/apache-druid
     container_name: apache-druid
     networks:
@@ -125,7 +126,7 @@ services:
     build:
       context: ./superset
       dockerfile: Dockerfile
-    platform: linux/amd64
+#     platform: linux/amd64
     image: soufianeodf/apache-superset
     container_name: superset
     networks:
