@@ -1,7 +1,7 @@
 ![version](https://img.shields.io/badge/version-v1.0-orange.svg)
 [![Twitter](https://img.shields.io/twitter/follow/odfsoufiane.svg?style=social)](https://twitter.com/intent/follow?screen_name=odfsoufiane)
 
-# Real-time Clickstream analytics
+# Real-time Clickstream analysis
 
 A proof of concept about collecting real-time clickstream data using Javascript, Divolte Collector, Apache Kafka, Kafka Streams, Apache Druid and Apache Superset.
 
@@ -9,7 +9,7 @@ At the end of the youtube video attached here, we are going to compare our resul
 
 # Youtube video
 
-* [Real-time Clickstream Analytics](#)
+* [Real-time Clickstream Analysis](https://youtu.be/tvGMEkY7Ysw)
 
 # Demo 
 #### (this demo may not be available after some time, due to cloud infrastructure costs)
